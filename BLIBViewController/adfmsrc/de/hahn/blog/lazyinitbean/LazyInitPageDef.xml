@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pageDefinition xmlns="http://xmlns.oracle.com/adfm/uimodel" version="12.1.3.9.1" id="LazyInitPageDef" Package="de.hahn.blog.lazyinitbean">
+  <parameters/>
+  <executables>
+    <variableIterator id="variables">
+      <variable Name="myTestValue" Type="java.lang.String" DefaultValue="I'm not realy here"/>
+    </variableIterator>
+  </executables>
+  <bindings>
+    <attributeValues IterBinding="variables" id="myTestValue1">
+      <AttrNames>
+        <Item Value="myTestValue"/>
+      </AttrNames>
+    </attributeValues>
+  </bindings>
+</pageDefinition>

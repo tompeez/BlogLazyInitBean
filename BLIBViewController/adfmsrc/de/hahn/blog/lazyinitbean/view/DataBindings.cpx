@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://xmlns.oracle.com/adfm/application" version="12.1.3.9.1" id="DataBindings" SeparateXMLFiles="false"
+             Package="de.hahn.blog.lazyinitbean.view" ClientType="Generic">
+  <definitionFactories>
+    <factory nameSpace="http://xmlns.oracle.com/adf/controller/binding" className="oracle.adf.controller.internal.binding.TaskFlowBindingDefFactoryImpl"/>
+    <dtfactory className="oracle.adf.controller.internal.dtrt.binding.BindingDTObjectFactory"/>
+  </definitionFactories>
+  <pageMap>
+    <page path="/Start.jsf" usageId="de_hahn_blog_lazyinitbean_view_StartPageDef"/>
+    <page path="/WEB-INF/de/hahn/blog/lazyinitbean/LazyInit.jsff" usageId="de_hahn_blog_lazyinitbean_view_LazyInitPageDef"/>
+  </pageMap>
+  <pageDefinitionUsages>
+    <page id="de_hahn_blog_lazyinitbean_view_StartPageDef" path="de.hahn.blog.lazyinitbean.view.pageDefs.StartPageDef"/>
+    <page id="de_hahn_blog_lazyinitbean_view_LazyInitPageDef" path="de.hahn.blog.lazyinitbean.LazyInitPageDef"/>
+  </pageDefinitionUsages>
+</Application>
