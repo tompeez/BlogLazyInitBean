@@ -1,8 +1,15 @@
 package de.hahn.blog.lazyinitbean.view.beans;
 
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
+import javax.servlet.ServletContext;
+
+import oracle.adf.model.BindingContext;
 import oracle.adf.share.logging.ADFLogger;
+
+import oracle.binding.AttributeBinding;
+import oracle.binding.BindingContainer;
 
 public class LazyInitBean {
     private static transient final ADFLogger LOGGER = ADFLogger.createADFLogger(LazyInitBean.class);
@@ -31,6 +38,21 @@ public class LazyInitBean {
         LOGGER.info("data intialized");
         // this method inits the beans attributes (only one here)!
         myName = "just init myself";
+        //Get ServlerContexct
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        ServletContext servletContext = (ServletContext) ctx.getExternalContext().getContext();
+        // get the binding container
+        BindingContainer bindings = BindingContext.getCurrent().getCurrentBindingsEntry();
+
+        // get an ADF attributevalue from the ADF page definitions
+        AttributeBinding attr = (AttributeBinding) bindings.getControlBinding("myTestValue1");
+        if (attr != null) {
+            String old = (String) attr.getInputValue();
+            attr.setInputValue("NEW DEFAULT VALUE");
+            LOGGER.info("LazyInitBean: setnew default value to 'NEW DEFAULT VALUE' old: " + old);
+        } else {
+            LOGGER.info("LazyInitBean: bindings not present!");
+        }
     }
 
     /**
@@ -46,6 +68,6 @@ public class LazyInitBean {
 
     public void buttonListener(ActionEvent actionEvent) {
         LOGGER.info("Action initData");
-        initData();
+        resetData();
     }
 }
