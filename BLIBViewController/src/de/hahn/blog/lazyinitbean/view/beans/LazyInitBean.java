@@ -1,5 +1,7 @@
 package de.hahn.blog.lazyinitbean.view.beans;
 
+import javax.annotation.PostConstruct;
+
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
@@ -23,6 +25,7 @@ public class LazyInitBean {
 
     public String getMyName() {
         // lazy init the data only when it's null
+        //  This method deferes the init of the data until the getter is called in the UI.
         if (myName == null) {
             LOGGER.info("init data through layz init");
             initData();
@@ -32,6 +35,13 @@ public class LazyInitBean {
 
     public LazyInitBean() {
         LOGGER.info("LazyInitBean: c'tor");
+    }
+
+    @PostConstruct
+    public void postconstructMethod() {
+        LOGGER.info("PostConstruct Called!");
+        // init everything here which can be done quickly and is needed to init UI components before showing them
+        // or call initData() from here
     }
 
     private void initData() {
